@@ -56,3 +56,5 @@ int main(){
     search(txt,pat);
     return 0;
 }
+
+//Complexity: O(m * NO_OF_CHARS)
