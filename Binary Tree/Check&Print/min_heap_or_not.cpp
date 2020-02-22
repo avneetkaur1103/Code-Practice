@@ -8,7 +8,7 @@ bool isMinHeap(int level[], int n){
 		if (level[i] > level[2*i+1])
 			return false;
 
-		if(n< 2*i+2){
+		if(n > 2*i+2){
 			if(level[i] > level[2*i+2])
 				return false;
 		}
