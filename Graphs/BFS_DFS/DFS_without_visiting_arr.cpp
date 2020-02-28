@@ -17,19 +17,19 @@ int main(){
 	vector<int> list[10000];
 
 	list[1].push_back(2); 
-    list[2].push_back(1); 
+    	list[2].push_back(1); 
   
-    list[1].push_back(3); 
-    list[3].push_back(1); 
+   	list[1].push_back(3); 
+    	list[3].push_back(1); 
   
-    list[2].push_back(4); 
-    list[4].push_back(2); 
+    	list[2].push_back(4); 
+    	list[4].push_back(2); 
   
-    list[3].push_back(5); 
-    list[5].push_back(3);
+    	list[3].push_back(5); 
+    	list[5].push_back(3);
 
-    dfs(list,1,0);
-    return 0;
+    	dfs(list,1,0);
+    	return 0;
 }
 
 //Avoid extra space used by visited nodes
