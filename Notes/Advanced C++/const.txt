@@ -1,0 +1,60 @@
+--'Const' is a compile time constraint.
+^^ RULE to remember: if const is on left of *, data is constant
+                  if const is on right of *, pointer is const
+
+-- const int *p1 = &i; // data i is const, p1 is not. 
+*p1 = 5; //not compile, as we are trying to change value pointed by p1.
+p1++; // compile, as it modifies p1 itself.
+
+int* const p2; //p2 is const, but data is not const
+const int* const p3; // both data and pointer are const
+
+-- We can cast away the constantness of data to change its value:
+const int i = 9;
+const_cast<int&> (i)= 6; // compile
+
+--If we have a non-const var, and we want to make it const at some point:
+int j;
+static_cast<const int&>(j);
+
+
+-- using cast is not a good coding practice
+-- Y use const: a. shields against inadvertent writes to variables.
+                b. more tighter code
+                c. var is put in ROM
+                
+                
+         
+-- We can pass variable as const ref if we dont want its value to be changed inside the func.
+
+void func(const int &i){
+  //do something
+  i++; //not compile
+}
+
+-- if we pass by value, const doesn't make much diff. func creates copy of i, which is temp and can be modified.
+void func(const int i){
+//do something
+i++; //not compile, still cant change i
+}
+
+void func(const int i) and void func(int i) -- are same //cannot be overloaded without reference.
+void func(const int& i) and void func(int &i) -- are overloaded. call depends on parameter passed is const or not.
+
+-- const return value:
+const string& func(){ // Here if we return by value, and not by ref, then func returns a copy which can be modified later, so 'const' is useless.
+  return s;
+}
+
+--const function: This means that func cannot change value of member func of class.
+void printName() const{
+  cout<<name<<endl; //prints name
+  age++; //not compile, as age is member variable
+ }
+ 
+ Const function can only call another const funct to maintain sonst correctness.
+ 
+ Const func can be overloaded.
+ 
+ void func() const{}  //called in case object is const ; const classname ob;
+ void func() {} //called in case of non-const object
