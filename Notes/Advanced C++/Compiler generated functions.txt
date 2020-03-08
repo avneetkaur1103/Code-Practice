@@ -1,0 +1,35 @@
+class abc {};
+
+compiler generates empty functions: abc(const abc& obj){}  //copy constructor - member by member initialization
+                                    abc& operator= (const anc& obj) {}  //assignment operator - member by member copying
+                                    abc(){} //constructor //1. call base class's default constructor; 2. call data member's default constructor
+                                    ~abc(){}  //destructor //1. call base class's default destructor; 2. call data member's default destructor
+
+
+Compiler silently generates these 4 functions: All are public  and inline and generated only if needed/used.
+COPY CONSTRUCTOR:
+
+COPY ASSIGNMENT OPERATOR:
+- not generated if one of the member is const or reference, they cannot be copied, only initialized.
+
+DESTRUCTOR:
+- if base class's destructor is private, object class's destructor will also not get generated
+
+CONSTRUCTOR: (Only when no other constuctor is declared)
+- if base class 's default constrctor is not there, object class's constructor will also not get generated
+
+
+Notess: 
+1.Default constructor is one which can work without passing any parameter.
+abc(){}  and   abc(string name = "Bob"){} both are default constructor.
+
+2.If any data member is a reference, then we cannot use STL containers, as containee should be copy assignable and copy constructable.
+Also, if class is like:
+
+class abc{
+  string& name;
+};
+
+int main(){
+  abc ob; //not compile as reference needs to be initialized
+}
