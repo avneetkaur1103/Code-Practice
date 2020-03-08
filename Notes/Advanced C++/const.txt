@@ -58,3 +58,21 @@ void printName() const{
  
  void func() const{}  //called in case object is const ; const classname ob;
  void func() {} //called in case of non-const object
+
+
+
+--BITWISE and LOGICAL constness
+if our logical model wants us to make a func 'const' so that the value of dat is not changed, but we need to increment a member variable (say count or access ptr), it will throw error as compiler maintains bitwise constness and does not allow us to change value of member variable.
+
+in that case, we define such member variable 'Mutable' - 
+mutable int count; //Better way
+Also, we can cast the constness away to increment it - 
+const_cast<class*>(this)->count++;
+
+Another example: we can use ptr to change value instead of changing the value of member var directly (maintains bitwise constness):
+
+int *v;
+
+void setV2(int idx, int x) const{
+  *(v2+idx) = x; 
+}
