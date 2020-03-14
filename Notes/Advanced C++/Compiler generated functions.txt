@@ -33,3 +33,31 @@ class abc{
 int main(){
   abc ob; //not compile as reference needs to be initialized
 }
+
+
+DISALLOW FUNCTIONS:
+Sometimes compiler generated funcs are harmful, e.g., class with Files. We can disallow compiler to generate such funcs with foll changes:
+
+class openFile{
+  public:
+    openFile(string name) {cout<<"open file: "<<name<<endl; }  //this will diallow generation of default constructor
+    void destroy(){ delete this;} //fail as object f is on stack and will again call destructor , whichis private.
+                                we should store object on heap if we are making a destructor private.
+                                use private destructor to stay out of stack.
+                                
+  private:
+     openFile(openFile &obj); //make copy constr a private fn with no definition or body will disallow calling of copy constr in main                                                                                             or from any member function.
+     openFile& operator=(const openFile& obj); //make copy assignment operator a private fn with no definition or body will disallow                                                                         calling of copy constr in main or from any member function.
+    //any other derived fn  to not allow opeFile obj to call it
+    
+    ~openFile(){ cout<"Destructor called"<<end; } //private destructor can only be called by member func or friend functions. This is                                           how we implement shared pointer refernce count.once all its child go out of scope, it sucides.
+    
+    
+}
+
+int main(){
+  openFile f(string name("abc"));
+  openFile f2(f); // not compile,as we have restricted calling of copy constructor otherwise both f and f2 will write to file abc(which                                                                                                           will cause issues)
+  
+  
+}
