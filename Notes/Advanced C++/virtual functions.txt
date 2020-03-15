@@ -1,0 +1,10 @@
+- We need to define destructor as virtual in base class, if we are using base class polymorphically.
+
+Note: All STL classes have no virtual destructor.So we should use shared-ptr while inheriting from them.
+
+- We can acheive the same using shared ptr and not use virtual function:
+  shared_ptr<Dog> d = shared_ptr<YellowDog>(new YellowDog()); // Here object of yellow dog will be destroyed first, then Dog's object will be destroyed.
+  
+  If in above case we use unique ptr, it will only invoke Dog's destructor.
+
+
