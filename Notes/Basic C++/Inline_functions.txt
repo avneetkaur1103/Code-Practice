@@ -1,0 +1,48 @@
+INLINE FUNCTIONS:
+* For small functions, the time needed to make a func call is lot more than the actual execution time. To avoid this overhead switching time,
+we make function inline.
+* The function call gets replaced with actual line of code at compile time.
+* compiler may choose not to consider a func as inline in certain cases- if it contains loop, static variable, recursive, switch/goto, etc.
+* Excess of inline functions cause overhead on register utilization and increase in executable size (thrashing  - 
+* Compiler can make func inline even if it is not specified.
+
+
+e.g. :
+inline ret_type func_name(parameters){ 
+  //code
+}
+
+
+* All func declared inside class are implicitly inline. We need to use inline while defining func outside the class.
+
+class abc{
+  public:
+    int square(int n);
+};
+
+inline int abc::square(int n){ return n*n; }
+
+
+* Prefer inline func over macros as macros cannot access private members of class. Also, macros are handled by preprocessor , while inline func are handled by C++ compiler.
+* Functions which have input output operations should not be made inline (already have overhead)
+* When we define virtual function as inline, and call it thru base ptr, it does not remain inline as which func needs to be called is decided at runtime(virtual keyword)
+
+class abc{
+	public:
+	virtual void show(){cout<<"Base func"<<endl;} //inline by default
+};
+
+class def: public abc{
+	public:
+	void show(){cout<<"Derived func"<<endl;} //inline by default
+};
+
+int main() {
+
+	abc b;
+	b.show(); //call inline fn
+	def d;
+	abc *a = &d;
+	a->show(); //does not call inline fn
+	return 0;
+}
