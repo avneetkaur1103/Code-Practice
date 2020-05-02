@@ -1,0 +1,19 @@
+Explicit keyword in constructor is used to inhibit implicit conversion of data type.
+e.g.:
+
+#include <iostream>
+using namespace std;
+
+class Foo {
+public:
+    explicit Foo(int n){cout<<"Int called"<<endl;} // allocates n bytes to the Foo object
+    Foo(const char *p){cout<<"Char called"<<endl;} // initialize object with char *p
+};
+
+int main() 
+{ 
+	// a Complex object 
+	//char c = 'X';
+	Foo mystring = 'x'; //Int called, if explicit key word is not present.
+	return 0; 
+} 
