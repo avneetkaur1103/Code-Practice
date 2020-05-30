@@ -1,0 +1,62 @@
+These design patterns are all about class instantiation.
+* Class creation patterns - use inheritence
+* Object creation patterns
+
+1. Singleton: 
+        
+        The singleton pattern is a design pattern that restricts the instantiation of a class to one object
+        and provide a global point of access to it.
+        Lazy initialization or just-in-time initialization.
+        Can make it thread safe.
+        
+        class Singleton{
+            static Singleton *obj;
+            Singleton(){}
+          public:
+            static Singleton* instance(){
+              if(!obj){
+                obj = new Singleton();
+                return obj;
+              }
+            }
+        };
+
+2. Factory: 
+      Define an interface for creating an object,
+      but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.
+      Defining a "virtual" constructor.
+      The new operator considered harmful.
+      
+      class Vehicle{
+        virtual void print(){}
+      };
+      
+      class twoWheeler: public Vehicle{
+        void print(){}
+      };
+      
+      class fourWheeler: public Vehicle{
+        void print(){}
+      };
+      
+      class Client{
+        Vehicle *v;
+        public:
+          Client(int type){
+            if(type == 1)
+              v = new twoWheeler();
+            else if (type == 2)
+              v = new fourWheeler();
+            else
+              v = NULL;
+          }
+          
+          ~Client(){
+            delete[] v;
+            v = NULL;
+          }
+      };
+
+3. Abstract Factory:
+
+4. 
