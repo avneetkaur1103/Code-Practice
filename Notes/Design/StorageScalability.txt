@@ -1,0 +1,18 @@
+Terminology:
+
+1. Replication : Replication refers to frequently copying the data across multiple machines.
+    Post replication, multiple copies of the data exists across machines.
+    
+2. Consistency: Assuming you have a storage system which has more than one machine, consistency implies that the data is same across the cluster,
+            so you can read or write to/from any node and get the same data. Eventual consistency - sync eventually.
+            
+3. Availability: Availability refers to the ability to always respond to queries ( read or write ) irrespective of nodes going down.
+
+4. Partition Tolerance: In context to database cluster, cluster continues to function even if 2 nodes cannot communicate.
+
+5. Vertical scaling and Horizontal scaling: Horizontal scaling is adding more servers. Vertical scaling is to increase resources - RAM, CPU, Storage, etc.
+
+6. Sharding: Sharding refers to splitting the very large database into smaller, faster and more manageable parts called data shards.
+
+CAP Theorem suggests that in a distributed system, it is impossible to simultaneously guarantee all 3 - Availability, consistency & partition tolerance.
+
