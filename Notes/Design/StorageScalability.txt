@@ -1,4 +1,4 @@
-Terminology:
+* Terminology:
 
 1. Replication : Replication refers to frequently copying the data across multiple machines.
     Post replication, multiple copies of the data exists across machines.
@@ -14,5 +14,7 @@ Terminology:
 
 6. Sharding: Sharding refers to splitting the very large database into smaller, faster and more manageable parts called data shards.
 
-CAP Theorem suggests that in a distributed system, it is impossible to simultaneously guarantee all 3 - Availability, consistency & partition tolerance.
+* CAP Theorem suggests that in a distributed system, it is impossible to simultaneously guarantee all 3 - Availability, consistency & partition tolerance.
 
+* Why Master-Slave db synchro?
+1. Master is less burdened with queries and replica is less burdened with writes, CPU availability is more
