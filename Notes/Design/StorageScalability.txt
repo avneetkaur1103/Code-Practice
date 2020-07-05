@@ -17,4 +17,6 @@
 * CAP Theorem suggests that in a distributed system, it is impossible to simultaneously guarantee all 3 - Availability, consistency & partition tolerance.
 
 * Why Master-Slave db synchro?
-1. Master is less burdened with queries and replica is less burdened with writes, CPU availability is more
+1. A database is "slaved" to a "master" when it receives a stream of updates from the master in near real-time, functioning as a copy. The "slave" must simply apply the changes that the master validated and approved.
+2. Master is less burdened with queries and replica is less burdened with writes, CPU availability is more.
+3. While writing to master, the data must have been cached in RAM. So replica ( to slaves) would not need to much data to supoort write load( can naively commit) and more RAM is available to serve queries.
