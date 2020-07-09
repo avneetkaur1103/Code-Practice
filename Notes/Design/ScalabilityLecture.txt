@@ -1,4 +1,34 @@
-* Web(Shared) Hosting vs VPSes: Sharing host means sharing server(s) and its resources with other websites - storage, bandwidth, etc. Virtual Private Server creates a virtual environment that imitates a dedicated server (where you get a chunk of server(or VM), and all its resources, to yourself), but within a shared hosting environment. VPS are more secure and outperforms shared hosting. Although owner of VPS server might have access to VM, depending on hypervisor used.
-Example - Amazon's EC2 (Elastic Compute Cloud), lets you spawn and create multiple VMs (web or database - on demand) as long one is willing to pay some amount per minute; can remove when popularity subsides.
+* Web(Shared) Hosting vs VPSes: Sharing host means sharing server(s) and its resources with other websites - storage, bandwidth, etc. Virtual Private Server creates a virtual environment that imitates a dedicated server (where you get a chunk of server(or VM), and all its resources, to yourself), but within a shared hosting environment. VPS are more secure and outperforms shared hosting. Though owner of VPS server might have access to VM, depending on hypervisor used.
+Example - Amazon's EC2 (Elastic Compute Cloud), lets you self service - spawn and create multiple VMs (web or database - on demand) as long one is willing to pay some amount per minute; can power off VMs when popularity subsides.
+SFTP more secure as comp to FTP - provides data encryption (usename/pwds).
+
 * Vertical Scaling vs Horizontal Scaling: In vertical scaling we can increase - CPU (Cores,Cache), Disk, RAM, etc. But we are gonna hit threshold  at somepoint, run out of either financial resources to upgrade or state of art in technology.
-Types of Disk/harddrives - PATA(old), SATA, SAS(serial attached SCSI
+
+- How to do Vertical Scaling:
+Older CPU handled multiple processes with single processor(by giving each process a split second of their time), but dual/quad cores truely work in parallel.quad core can handle 4 processes at once , but with multihreading it gives an impression of many more.
+Types of Disk/harddrives - PATA(old), SATA(7200 rpm), SAS - serial attached SCSI (10k-15k rpm), SSD - Solid state drives(electrically faster as comp to mechanical drives)
+
+- How to do Horizontal Scaling:
+Architecting system so that we use cheaper hardware and acheive parallelism in our topology.
+Limitations-
+a. Round-robin &  DNS- store multiple IPs for a URL & return a next ip in the circle each time queried. This can overload some of the server, sending all heavy queries to them.
+b. OS & Browser IP Caching avoids querying DNS server again n again and forwards request to same web server.(till TTL)
+
+Instead we can choose LB level rounds robin - Single IP for load balancer, no DNS caching issue, Web servers can have private IP addresses(secure).
+LB communicates with Web Servers using TCP/IP - sending packets (same btw client & LB).
+
+Although with above round robin we end up skipping session & cookie handling problems which is valid only in that server machine. we now have to keep separate line of storage server(or at LB itself in case of single LB which would be consistent) to keep these session info - maybe a Network file system or DB like MySql. => Replication
+
+* RAID: Redundant Array of Independent Disks - used to store shared sessions in LB. but still has h/w limitations like Power supply, limited storage, etc.
+  - RAID 0 - 2HD, stripe data across disks, good performance
+  - RAID 1 - 2 HD, Mirror data in both, Fault Tolerance
+  - RAID10 - 4 HD, RAID0+RAID1
+  - RAID5/6 - 1/2 out of 3/4 HD used for redundancy(better than RAID1)
+  
+* Shared Storage: 
+FC - fibre Channel(file server); mysql
+
+ 
+
+
+
