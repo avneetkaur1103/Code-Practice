@@ -10,6 +10,7 @@ Types of Disk/harddrives - PATA(old), SATA(7200 rpm), SAS - serial attached SCSI
 
 - How to do Horizontal Scaling:
 Architecting system so that we use cheaper hardware and acheive parallelism in our topology.
+
 Limitations-
 a. Round-robin &  DNS- store multiple IPs for a URL & return a next ip in the circle each time queried. This can overload some of the server, sending all heavy queries to them.
 b. OS & Browser IP Caching avoids querying DNS server again n again and forwards request to same web server.(till TTL)
@@ -17,18 +18,22 @@ b. OS & Browser IP Caching avoids querying DNS server again n again and forwards
 Instead we can choose LB level rounds robin - Single IP for load balancer, no DNS caching issue, Web servers can have private IP addresses(secure).
 LB communicates with Web Servers using TCP/IP - sending packets (same btw client & LB).
 
-Although with above round robin we end up skipping session & cookie handling problems which is valid only in that server machine. we now have to keep separate line of storage server(or at LB itself in case of single LB which would be consistent) to keep these session info - maybe a Network file system or DB like MySql. => Replication
+Although with above round robin we end up skipping session & cookie handling problems which is valid only in that server machine. we now have to keep separate line of storage server(or at LB itself in case of single LB which would be consistent) to keep these session info - maybe a Network file system or DB like MySql(Replication).
 
+* Sticky Sessions - Session is preserved even if we visit a website multiple times, end up on same web server.
+- Cookies: Few Kbs, LB can put a large number in cookie which is mapped to web server in LB, which end user sends back in subsequent requests.
+(LB here has the ability to work @HTTP level) => The system breaks down if cookies are disabled.
+
+- Shared session
 * RAID: Redundant Array of Independent Disks - used to store shared sessions in LB. but still has h/w limitations like Power supply, limited storage, etc.
   - RAID 0 - 2HD, stripe data across disks, good performance
   - RAID 1 - 2 HD, Mirror data in both, Fault Tolerance
   - RAID10 - 4 HD, RAID0+RAID1
   - RAID5/6 - 1/2 out of 3/4 HD used for redundancy(better than RAID1)
   
-* Shared Storage: 
-FC - fibre Channel(file server); mysql
+* php accelerators - generates "compiled version" of php files, so code is not parsed , if visited again.
 
- 
+* CraingsList caches dynamically generated .html pages as caches => gives a good performance benefit as spitting out static content is pretty fast, but also compromises on the fact if there are any changes is html template all those files needs to be regenerated & uses a lot more storage as it doesn't take advantage of having a common template for all .html files. 
 
 
 
