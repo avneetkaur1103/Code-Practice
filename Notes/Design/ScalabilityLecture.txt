@@ -52,3 +52,8 @@ High-Availability - more than one instances of components(server, LB, DBs) in to
 Although like LBs, DBs won't have access to Http messages so we can't partition here based on text range or so.
 
 
+* Multiple LB can also fail, need to plug them to diff switches.
+*Geography based load balancing is still DNS level as it needs to be sticky => No round robin in here => Then how do we deal with down time? => wait for TTL to expire - check
+
+*Traffic from Internet can be dropped off, added security like SSL once past LB into private server networks. All SSL certifications & cryptography are handles at LB now.
+* Switches can act as firewalls - provide least previledges.
