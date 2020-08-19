@@ -1,0 +1,1 @@
+* While accessing 2D array, row by row traversal is faster as compared to Col by col traversal.TC is O(n^2) but actual time taken is less. This is because C/C++ stores matrix in row major form and accessing (i+1)th element after ith element will most probably be a cache hit.
