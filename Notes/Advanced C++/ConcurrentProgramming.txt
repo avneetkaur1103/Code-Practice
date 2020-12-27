@@ -1,0 +1,14 @@
+* Process Vs Threads:
+
+PROCESS:
+each process has 1 thread running and they communicate through IPC channels like pipe, msg queues, files,etc.
+Process is slow to start as OS has to allocate bunch of internal resources.
+process has more overhead while running, e.g., OS has to provide a lot of protection so that one process accidentally does not overstep another process.
+
+THREAD:
+each process has one or more threads which communicate through shared memory.
+thread is faster to start; lightweight process.
+thread has lower overhead.
+communication thru shared memory is faster than IPC mechanisms.
+disadv - difficult to implement, need to take care of multithreading issues.
+       - unlike multiprocessing, cannot be run on distributed systems.
