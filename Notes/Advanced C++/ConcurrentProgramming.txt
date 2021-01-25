@@ -12,3 +12,24 @@ thread has lower overhead.
 communication thru shared memory is faster than IPC mechanisms.
 disadv - difficult to implement, need to take care of multithreading issues.
        - unlike multiprocessing, cannot be run on distributed systems.
+
+
+#include <iostream>
+#include <thread>
+
+void func(){
+       std::cout<<"Hello World!"<<std::endl;
+}
+
+int main(){
+       std::thread t1(func);
+       t1.join(); // main thread will wait for t1 fo finish
+       t1.detach(); //t1 will run freely on its own, main will finish independently, c++                        will claim resources used by t1 -- daemon process
+       
+       if(t1.joinable())  //Check if thread is joinable, else program will crash
+              t1.join(); // we can join or detach a thread only once in its lifetime.
+              
+       return 0;       
+}
+
+
